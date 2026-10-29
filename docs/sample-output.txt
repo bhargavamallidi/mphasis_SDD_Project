@@ -1,0 +1,37 @@
+TRANSACTION_RECEIVED requestId=REQ-2 transactionId=TXN-2002 sequence=2
+TRANSACTION_PENDING transactionId=TXN-2002 sequence=2
+TRANSACTION_RECEIVED requestId=REQ-1 transactionId=TXN-2001 sequence=1
+TRANSACTION_PROCESSED transactionId=TXN-2001 sequence=1 attempts=1
+TRANSACTION_PROCESSED transactionId=TXN-2002 sequence=2 attempts=1
+TRANSACTION_RECEIVED requestId=REQ-2-DUP transactionId=TXN-2002 sequence=2
+TRANSACTION_DUPLICATE requestId=REQ-2-DUP transactionId=TXN-2002
+TRANSACTION_RECEIVED requestId=REQ-3 transactionId=TXN-2003 sequence=3
+TRANSACTION_PROCESSED transactionId=TXN-2003 sequence=3 attempts=1
+TRANSACTION_RECEIVED requestId=REQ-4 transactionId=TXN-2004 sequence=4
+TRANSACTION_REJECTED transactionId=TXN-2004 errorCode=INVALID_AMOUNT
+TRANSACTION_RECEIVED requestId=REQ-5 transactionId=TXN-2005 sequence=5
+RETRY_ATTEMPT transactionId=TXN-2005 attempt=2
+TRANSACTION_PROCESSED transactionId=TXN-2005 sequence=5 attempts=2
+Requests read: 6
+Request outcomes:
+  transactionId=TXN-2002 sequence=2 status=PROCESSED attempts=1
+  transactionId=TXN-2001 sequence=1 status=PROCESSED attempts=1
+  transactionId=TXN-2002 sequence=2 status=DUPLICATE attempts=0
+  transactionId=TXN-2003 sequence=3 status=PROCESSED attempts=1
+  transactionId=TXN-2004 sequence=4 status=REJECTED attempts=0 errorCode=INVALID_AMOUNT
+  transactionId=TXN-2005 sequence=5 status=PROCESSED attempts=2
+Request outcome counts: {RECEIVED=0, PROCESSING=0, PROCESSED=4, DUPLICATE=1, PENDING=0, RETRY_PENDING=0, REJECTED=1, FAILED=0}
+Canonical transaction states: {RECEIVED=0, PROCESSING=0, PROCESSED=4, DUPLICATE=0, PENDING=0, RETRY_PENDING=0, REJECTED=1, FAILED=0}
+Total attempts: 5
+Pending sequences: []
+Missing sequences: []
+Blocking sequence: null
+Final balances:
+  ACC-201/USD=85.00
+  ACC-202/USD=0.00
+  ACC-203/USD=500.00
+Ledger entries: 4
+  TXN-2001 ACC-201 CREDIT 100.00 -> 100.00
+  TXN-2002 ACC-201 DEBIT 40.00 -> 60.00
+  TXN-2003 ACC-201 CREDIT 25.00 -> 85.00
+  TXN-2005 ACC-203 CREDIT 500.00 -> 500.00
